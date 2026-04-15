@@ -2,7 +2,7 @@
 
 Python valuation engine and FastAPI service for property lookup, comp-based valuation, and leverage context.
 
-This is the clean backend/core repo. It is narrower than the portfolio app and focuses on:
+This repo is the backend/core version of the project. It stays focused on a few things:
 
 - valuation math
 - Trestle-backed property lookup
@@ -20,10 +20,14 @@ This is the clean backend/core repo. It is narrower than the portfolio app and f
 ## Install
 
 ```bash
+python3 -m venv .venv
+. .venv/bin/activate
 python3 -m pip install -e .[dev]
 ```
 
 ## Run
+
+Set your Trestle credentials first:
 
 ```bash
 export TRESTLE_CLIENT_ID=...
@@ -36,7 +40,7 @@ export PORT=8787
 ltv-valuation
 ```
 
-Health check:
+Then check the service:
 
 ```bash
 curl http://127.0.0.1:8787/health
@@ -46,7 +50,7 @@ curl http://127.0.0.1:8787/health
 
 ### `POST /api/trestle/properties/list`
 
-Generic Trestle property search.
+Search Trestle properties.
 
 Example:
 
@@ -66,7 +70,7 @@ Single property lookup.
 
 ### `POST /api/trestle/valuation/summary`
 
-One-call property summary generation.
+Generate a one-call property summary.
 
 Example:
 
@@ -78,7 +82,7 @@ Example:
 }
 ```
 
-Response includes:
+The response includes:
 
 - resolved subject property
 - ranked suggestions
@@ -93,6 +97,8 @@ Response includes:
 ```python
 from ltv_valuation import calculate_valuations, generate_property_summary
 ```
+
+That makes it easy to use the valuation logic directly without running the API.
 
 ## Verify
 
